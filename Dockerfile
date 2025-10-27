@@ -34,6 +34,7 @@ RUN apt-get update && \
 COPY colmap /usr/local/bin/colmap
 COPY glomap /usr/local/bin/glomap
 COPY requirements.txt /requirements.txt
+COPY rp_handler.py /rp_handler.py
 RUN pip3.10 install -r requirements.txt
 
 WORKDIR /workspace
@@ -42,3 +43,5 @@ COPY dropbox_tools.py SCRIPTS
 COPY run_glo.sh SCRIPTS
 COPY video_download.sh SCRIPTS
 COPY scene_upload.sh SCRIPTS
+
+CMD [ "python", "-u", "/rp_handler.py" ]
