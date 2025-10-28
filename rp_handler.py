@@ -14,8 +14,8 @@ async def async_handler(event):
     
     #print(f"Sleeping for {seconds} seconds...")
 
-    cmd_1 = ['SCRIPTS/video_download','0', token]
-    cmd_2 = ['./run_glo.sh']
+    cmd_1 = ['SCRIPTS/video_download.sh','0', token]
+    cmd_2 = ['SCRIPTS/run_glo.sh']
     cmd_3 = ['SCRIPTS/scene_upload.sh', scene, token]
     out = subprocess.Popen(cmd_2, stdout=subprocess.PIPE)
     await print(out.stdout.decode('utf-8'))
