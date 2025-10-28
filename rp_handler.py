@@ -8,11 +8,20 @@ async def async_handler(event):
     
     seconds = input.get('seconds', 0)
     items = input.get('items', 0)
+    scene = input.get('scene', '0')
+    token = input.get('token', '0')
+
     
     #print(f"Sleeping for {seconds} seconds...")
 
-    cmd = ['./run_glo.sh']
-    out = subprocess.Popen(cmd, stdout=subprocess.PIPE)#.run(cmd, capture_output=True, text=True)
+    cmd_1 = ['SCRIPTS/video_download','0', token]
+    cmd_2 = ['./run_glo.sh']
+    cmd_3 = ['SCRIPTS/scene_upload.sh', scene, token]
+    out = subprocess.Popen(cmd_2, stdout=subprocess.PIPE)
+    await print(out.stdout.decode('utf-8'))
+    out = subprocess.Popen(cmd_2, stdout=subprocess.PIPE)#.run(cmd, capture_output=True, text=True)
+    await print(out.stdout.decode('utf-8'))
+    out = subprocess.Popen(cmd_2, stdout=subprocess.PIPE)
     await print(out.stdout.decode('utf-8'))
 
     #for i in range(items):
