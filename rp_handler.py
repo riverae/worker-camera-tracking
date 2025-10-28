@@ -17,12 +17,12 @@ async def async_handler(event):
     cmd_1 = ['SCRIPTS/video_download.sh','0', token]
     cmd_2 = ['SCRIPTS/run_glo.sh']
     cmd_3 = ['SCRIPTS/scene_upload.sh', scene, token]
-    out = subprocess.Popen(cmd_2, stdout=subprocess.PIPE)
+    out = subprocess.Popen(cmd_1, stdout=subprocess.PIPE)
     await print(out.stdout.decode('utf-8'))
     out = subprocess.Popen(cmd_2, stdout=subprocess.PIPE)#.run(cmd, capture_output=True, text=True)
     await print(out.stdout.decode('utf-8'))
-    out = subprocess.Popen(cmd_2, stdout=subprocess.PIPE)
-    await print(out.stdout.decode('utf-8'))
+    #out = subprocess.Popen(cmd_3, stdout=subprocess.PIPE)
+    #await print(out.stdout.decode('utf-8'))
 
     #for i in range(items):
     #    output = f"Processing for index {i} of items..."
