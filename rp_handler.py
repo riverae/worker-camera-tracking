@@ -19,7 +19,7 @@ async def async_handler(event):
     x = [cmd_1, cmd_2]
     for i in x:
         out = subprocess.Popen(i, stdout=subprocess.PIPE)
-        await print(out.stdout.decode('utf-8'))
+        yield print(out.stdout.decode('utf-8'))
     #out = subprocess.Popen(cmd_1, stdout=subprocess.PIPE)
     #await print(out.stdout.decode('utf-8'))
     #out = subprocess.Popen(cmd_2, stdout=subprocess.PIPE)#.run(cmd, capture_output=True, text=True)
