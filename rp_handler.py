@@ -1,13 +1,12 @@
 import runpod
 import asyncio
 import subprocess
+#import numpy as np
 
 async def async_handler(event):
     print(f"Worker Start")
     input = event['input']
     
-    seconds = input.get('seconds', 0)
-    items = input.get('items', 0)
     scene = input.get('scene', '0')
     token = input.get('token', '0')
 
@@ -17,10 +16,14 @@ async def async_handler(event):
     cmd_1 = ['SCRIPTS/video_download.sh','0', token]
     cmd_2 = ['SCRIPTS/run_glo.sh']
     cmd_3 = ['SCRIPTS/scene_upload.sh', scene, token]
-    out = subprocess.Popen(cmd_1, stdout=subprocess.PIPE)
-    await print(out.stdout.decode('utf-8'))
-    out = subprocess.Popen(cmd_2, stdout=subprocess.PIPE)#.run(cmd, capture_output=True, text=True)
-    await print(out.stdout.decode('utf-8'))
+    x = [cmd_1, cmd_2]
+    for i in x:
+        out = subprocess.Popen(i, stdout=subprocess.PIPE)
+        await print(out.stdout.decode('utf-8'))
+    #out = subprocess.Popen(cmd_1, stdout=subprocess.PIPE)
+    #await print(out.stdout.decode('utf-8'))
+    #out = subprocess.Popen(cmd_2, stdout=subprocess.PIPE)#.run(cmd, capture_output=True, text=True)
+    #await print(out.stdout.decode('utf-8'))
     #out = subprocess.Popen(cmd_3, stdout=subprocess.PIPE)
     #await print(out.stdout.decode('utf-8'))
 
