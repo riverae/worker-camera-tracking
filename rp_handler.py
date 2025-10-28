@@ -1,40 +1,29 @@
 import runpod
-import time
 import asyncio
+import subprocess
 
-def handler(event):
+async def async_handler(event):
     print(f"Worker Start")
     input = event['input']
-
-    prompt = input.get('prompt')
-    seconds = input.get('seconds', 0)
-
-    print(f"Recieved prompt: {prompt}")
-    print(f"Sleeping for {seconds} seconds...")
-
-    time.sleep(seconds)
-    return prompt
-
-async def handler_async(event):
-    print(f"Worker Start")
-    input = event['input']
-
-    #prompt = input.get('prompt')
+    
     seconds = input.get('seconds', 0)
     items = input.get('items', 0)
+    
+    #print(f"Sleeping for {seconds} seconds...")
 
-    #print(f"Recieved prompt: {prompt}")
-    print(f"Sleeping for {seconds} seconds...")
+    cmd = ['./run_glo.sh']
+    out = subprocess.Popen(cmd, stdout=subprocess.PIPE)#.run(cmd, capture_output=True, text=True)
+    await print(out.stdout.decode('utf-8'))
 
-    for i in range(items):
-        output = f"Processing for index {i} of items..."
-        await asyncio.sleep(seconds)
-        yield output
+    #for i in range(items):
+    #    output = f"Processing for index {i} of items..."
+    #    await asyncio.sleep(seconds)
+    #    yield output
 
-    #return prompt
+    
 
 if __name__ == '__main__':
     runpod.serverless.start({
-        'handler': handler_async,
+        'handler': async_handler,
         'return_aggregate_stream': True
     })
