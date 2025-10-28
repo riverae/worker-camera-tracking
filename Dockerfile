@@ -44,4 +44,4 @@ COPY run_glo.sh SCRIPTS
 COPY video_download.sh SCRIPTS
 COPY scene_upload.sh SCRIPTS
 
-CMD [ "python", "-u", "/rp_handler.py" ]
+CMD [ "python", "-u", "/rp_handler.py", "--rp_serve_api"]
