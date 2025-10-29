@@ -10,11 +10,14 @@ def handler(event):
     
     cmd_1 = ['SCRIPTS/video_download.sh',f'{index}', f'{token}']
     cmd_2 = ['SCRIPTS/run_glo.sh']
+    cmd_3 = ['SCRIPTS/scene_upload.sh', f'{scene}', f'{token}']
     
     subprocess.call(cmd_1)
     yield "Video download complete"
     subprocess.call(cmd_2)
-    yield "Camera tracking complete"    
+    yield "Camera tracking complete"
+    #subprocess.call(cmd_3)
+    #yield "Scene upload complete"    
     
 
 runpod.serverless.start({"handler": handler})
