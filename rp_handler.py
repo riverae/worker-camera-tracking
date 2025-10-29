@@ -16,8 +16,8 @@ def handler(event):
     yield "Video download complete"
     subprocess.call(cmd_2)
     yield "Camera tracking complete"
-    #subprocess.call(cmd_3)
-    #yield "Scene upload complete"    
+    subprocess.call(cmd_3)
+    yield "Scene upload complete"    
     
 
 runpod.serverless.start({"handler": handler})
