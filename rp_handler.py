@@ -1,41 +1,20 @@
 import runpod
-import asyncio
 import subprocess
-#import numpy as np
 
-async def async_handler(event):
-    print(f"Worker Start")
+def handler(event):
     input = event['input']
-    
+        
+    index = input.get('index', '0')
     scene = input.get('scene', '0')
     token = input.get('token', '0')
-
     
-    #print(f"Sleeping for {seconds} seconds...")
-
-    cmd_1 = ['SCRIPTS/video_download.sh','0', token]
+    cmd_1 = ['SCRIPTS/video_download.sh',f'{index}', f'{token}']
     cmd_2 = ['SCRIPTS/run_glo.sh']
-    cmd_3 = ['SCRIPTS/scene_upload.sh', scene, token]
-    x = [cmd_1, cmd_2]
-    for i in x:
-        out = subprocess.Popen(i, stdout=subprocess.PIPE)
-        yield print(out.stdout.decode('utf-8'))
-    #out = subprocess.Popen(cmd_1, stdout=subprocess.PIPE)
-    #await print(out.stdout.decode('utf-8'))
-    #out = subprocess.Popen(cmd_2, stdout=subprocess.PIPE)#.run(cmd, capture_output=True, text=True)
-    #await print(out.stdout.decode('utf-8'))
-    #out = subprocess.Popen(cmd_3, stdout=subprocess.PIPE)
-    #await print(out.stdout.decode('utf-8'))
-
-    #for i in range(items):
-    #    output = f"Processing for index {i} of items..."
-    #    await asyncio.sleep(seconds)
-    #    yield output
-
+    
+    subprocess.call(cmd_1)
+    yield "Video download complete"
+    subprocess.call(cmd_2)
+    yield "Camera tracking complete"    
     
 
-if __name__ == '__main__':
-    runpod.serverless.start({
-        'handler': async_handler,
-        'return_aggregate_stream': True
-    })
+runpod.serverless.start({"handler": handler})
