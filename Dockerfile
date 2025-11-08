@@ -45,4 +45,4 @@ COPY video_download.sh SCRIPTS
 COPY scene_upload.sh SCRIPTS
 
 #CMD [ "python", "-u", "/rp_handler.py", "--rp_serve_api", "--rp_api_host", "0.0.0.0"]
-CMD [ "python", "-u", "/rp_handler.py"]
+#CMD [ "python", "-u", "/rp_handler.py"]
